@@ -6,6 +6,8 @@ A super simple FastAPI application that allows students to view and sign up for 
 
 - View all available extracurricular activities
 - Sign up for activities
+- Persist activities and enrollments in a SQLite database
+- Automatic SQL migration execution on startup
 
 ## Getting Started
 
@@ -20,6 +22,11 @@ A super simple FastAPI application that allows students to view and sign up for 
    ```
    python app.py
    ```
+
+   On startup, the app automatically:
+   - Creates `src/data/school.db` if needed
+   - Runs unapplied SQL migrations from `src/migrations`
+   - Seeds default activities if the database is empty
 
 3. Open your browser and go to:
    - API documentation: http://localhost:8000/docs
@@ -47,4 +54,4 @@ The application uses a simple data model with meaningful identifiers:
    - Name
    - Grade level
 
-All data is stored in memory, which means data will be reset when the server restarts.
+Data is stored in SQLite, so activity and enrollment changes survive server restarts.
